@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">sacredsun_android_phone</string>
+    <string name="app_name">圣阳移动</string>
+
+    <string name="position_one">正1</string>
+    <string name="negative_one">负1</string>
+    <string name="position_two">正2</string>
+    <string name="negative_two">负2</string>
+    <string name="temperature">温度 :&#160;</string>
+    <string name="humidity">湿度 :&#160;</string>
+    <string name="actual">实际 :&#160;</string>
 </resources>

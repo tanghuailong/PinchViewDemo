@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vstar.sacredsun_android_phone.MainActivity"
+    tools:context="com.vstar.sacredsun_android_phone.ui.activity.MainActivity"
     android:background="@color/custom_bg_color">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -26,12 +27,20 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/custom_txt_color"
                     android:background="@drawable/border"
-                    android:text="正区1"/>
+                    android:text="@string/negative_one"/>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.85"></RelativeLayout>
+                android:layout_weight="0.85">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/negative_one_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
         <View
             android:layout_width="8dp"
@@ -40,7 +49,31 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/custom_txt_color"
+                    android:background="@drawable/border"
+                    android:text="@string/position_one"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.85">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/position_one_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
     <View
@@ -48,6 +81,7 @@
         android:layout_height="8dp"
         android:background="@color/dividor_color">
     </View>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,7 +90,31 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/custom_txt_color"
+                    android:background="@drawable/border"
+                    android:text="@string/negative_two"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.85">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/negative_two_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
         <View
             android:layout_width="8dp"
@@ -65,7 +123,31 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/custom_txt_color"
+                    android:background="@drawable/border"
+                    android:text="@string/position_two"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.85">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/position_two_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
