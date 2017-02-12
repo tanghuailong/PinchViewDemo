@@ -8,4 +8,6 @@
     <string name="temperature">温度 :&#160;</string>
     <string name="humidity">湿度 :&#160;</string>
     <string name="actual">实际 :&#160;</string>
+
+    <string name="BASE_URL"></string>
 </resources>

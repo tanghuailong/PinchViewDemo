@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.vstar.sacredsun_android_phone.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         settingRecyclerView(recyclerViewPO);
         settingRecyclerView(recyclerViewPT);
