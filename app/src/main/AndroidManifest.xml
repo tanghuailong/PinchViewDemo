@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vstar.sacredsun_android_phone">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,14 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/custom.fullscreen"
         android:name=".App">
-        <activity android:name=".ui.activity.TestActivity">
+        <activity android:name=".ui.activity.MainActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.JumpActivity"></activity>
+        <activity android:name=".ui.activity.DetailActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden">
+
+        </activity>
     </application>
 
 </manifest>

@@ -39,7 +39,10 @@ public class HttpMethods {
     private static Context context = App.getInstance();
 
     private HttpMethods() {
-
+//
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//        OkHttpClient client = builder.addNetworkInterceptor(new StethoInterceptor())
+//                .connectTimeout(DEFAULT_TIME, TimeUnit.SECONDS).build();
         retrofit = new Retrofit.Builder()
                 .client(getUnsafeOkHttpClient())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

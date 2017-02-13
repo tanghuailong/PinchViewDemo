@@ -21,12 +21,14 @@ import com.vstar.sacredsun_android_phone.util.RxHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
 import rx.Subscription;
 
 
@@ -96,22 +98,22 @@ public class MainActivity extends AppCompatActivity {
     private void settingRecyclerView(RecyclerView recyclerView, @AppConstant.Position int position) {
         switch (position) {
             case AppConstant.POSITIVE_ONE:
-                recyclerViewPO.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 positive_adapter_1 = new StoveAdapter(list_positive_1, this, PageCategory.ALL);
                 recyclerView.setAdapter(positive_adapter_1);
                 break;
             case AppConstant.POSITIVE_TWO:
-                recyclerViewPT.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 positive_adapter_2 = new StoveAdapter(list_positive_2, this,PageCategory.ALL);
                 recyclerView.setAdapter(positive_adapter_2);
                 break;
             case AppConstant.NEGATIVE_ONE:
-                recyclerViewNO.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 negative_adapter_1 = new StoveAdapter(list_negative_1, this,PageCategory.ALL);
                 recyclerView.setAdapter(negative_adapter_1);
                 break;
             case AppConstant.NEGATIVE_TWO:
-                recyclerViewNT.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 negative_adapter_2 = new StoveAdapter(list_negative_2, this,PageCategory.ALL);
                 recyclerView.setAdapter(negative_adapter_2);
                 break;
@@ -121,13 +123,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        //TODO 没有解除订阅
+
         subscription1 = HttpMethods.getInstane().getService(MobileApi.class)
                 .getDeviceBasicData(positive)
                 .compose(RxHelper.io_main())
+                .retryWhen(errors -> errors.flatMap(error -> Observable.timer(5, TimeUnit.SECONDS)))
+                .repeatWhen(completed -> completed.delay(5, TimeUnit.SECONDS))
                 .subscribe((r) -> {
                     Log.d(LOG_TAG, "onNext");
-                    if (r.getItems().size() < singleLimit) {
+                    if (r.getItems().size() <= singleLimit) {
                         updateRecyclerView(list_positive_1, r.getItems(), positive_adapter_1);
                     } else {
                         updateRecyclerView(list_positive_1, FunctionUtil.getHeaderList(r.getItems(),singleLimit), positive_adapter_1);
@@ -139,12 +143,14 @@ public class MainActivity extends AppCompatActivity {
         subscription2 = HttpMethods.getInstane().getService(MobileApi.class)
                 .getDeviceBasicData(negative)
                 .compose(RxHelper.io_main())
+                .retryWhen(errors -> errors.flatMap(error -> Observable.timer(10, TimeUnit.SECONDS)))
+                .repeatWhen(completed -> completed.delay(10, TimeUnit.SECONDS))
                 .subscribe((r) -> {
-                    if (r.getItems().size() < singleLimit) {
-                        updateRecyclerView(list_negative_1, r.getItems(), positive_adapter_1);
+                    if (r.getItems().size() <= singleLimit) {
+                        updateRecyclerView(list_negative_1, r.getItems(), negative_adapter_1);
                     } else {
-                        updateRecyclerView(list_negative_1, FunctionUtil.getHeaderList(r.getItems(),singleLimit), positive_adapter_1);
-                        updateRecyclerView(list_negative_2,FunctionUtil.getFooterList(r.getItems(),singleLimit),positive_adapter_2);
+                        updateRecyclerView(list_negative_1, FunctionUtil.getHeaderList(r.getItems(),singleLimit), negative_adapter_1);
+                        updateRecyclerView(list_negative_2,FunctionUtil.getFooterList(r.getItems(),singleLimit),negative_adapter_2);
                     }
                 }, (e) -> {
                     Log.e(LOG_TAG, "some error occur", e);
@@ -171,11 +177,11 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Activity 跳转
-     * @param position
+     * @param point
      */
-    private void jumpToActivity(@AppConstant.Position int position) {
+    private void jumpToActivity(@AppConstant.Position int point) {
         Intent intent = new Intent(this,DetailActivity.class);
-        intent.putExtra(areaPosition,position);
+        intent.putExtra(areaPosition,point);
         startActivity(intent);
     }
     /**
@@ -187,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateRecyclerView(List<DeviceEntity> list, List<DeviceEntity> listAdd, StoveAdapter adapter) {
         list.clear();
         list.addAll(listAdd);
-        adapter.notifyItemRangeChanged(0,list.size());
+        adapter.notifyItemRangeChanged(0,list_negative_1.size());
     }
 
     @Override

@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vstar.sacredsun_android_phone.R;
 import com.vstar.sacredsun_android_phone.entity.DeviceEntity;
 import com.vstar.sacredsun_android_phone.util.PageCategory;
+import com.vstar.sacredsun_android_phone.util.StatusMap;
 
 import java.util.List;
 
@@ -57,8 +59,9 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, int position) {
         DeviceEntity stoveItem = lists.get(position);
         if(stoveItem != null) {
+            holder.container.setBackgroundColor(StatusMap.statusAndView.get(stoveItem.getStatus().name()));
             holder.stoveNum.setText(stoveItem.getAssetsCode());
-            holder.stoveRunStatus.setText(stoveItem.getStatus().name());
+            holder.stoveRunStatus.setText(StatusMap.abbreAndDesc.get(stoveItem.getStatus().name()));
             holder.stoveTempSetting.setText(stoveItem.getTemperature());
             holder.stoveTempValue.setText(stoveItem.getTemperature1());
             holder.stoveHumiSetting.setText(stoveItem.getHumidity());
@@ -73,6 +76,8 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.stove_item_container)
+        LinearLayout container;
         @BindView(R.id.stove_num)
         TextView stoveNum;
         @BindView(R.id.stove_run_status)
