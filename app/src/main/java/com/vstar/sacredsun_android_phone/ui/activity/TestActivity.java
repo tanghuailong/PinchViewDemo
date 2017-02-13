@@ -15,7 +15,7 @@ import butterknife.OnClick;
 /**
  * Created by tanghuailong on 2017/2/9.
  */
-
+@Deprecated
 public class TestActivity extends AppCompatActivity{
 
     @BindView(R.id.layout1)

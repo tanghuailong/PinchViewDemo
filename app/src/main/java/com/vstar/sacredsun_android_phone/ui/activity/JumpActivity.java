@@ -9,7 +9,7 @@ import com.vstar.sacredsun_android_phone.R;
 /**
  * Created by tanghuailong on 2017/2/12.
  */
-
+@Deprecated
 public class JumpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

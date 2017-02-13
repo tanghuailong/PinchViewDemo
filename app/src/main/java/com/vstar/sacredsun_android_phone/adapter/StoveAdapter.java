@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.vstar.sacredsun_android_phone.R;
 import com.vstar.sacredsun_android_phone.entity.DeviceEntity;
+import com.vstar.sacredsun_android_phone.util.PageCategory;
 
 import java.util.List;
 
@@ -23,11 +24,17 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
 
     private List<DeviceEntity> lists;
     private Context context;
+    private PageCategory category;
     private OnRecyclerViewItemClickListener listener;
 
-    public StoveAdapter(List<DeviceEntity> lists, Context context,OnRecyclerViewItemClickListener listener) {
+    public StoveAdapter(List<DeviceEntity> lists, Context context, PageCategory category) {
+        this(lists,context,category,null);
+    }
+
+    public StoveAdapter(List<DeviceEntity> lists, Context context,PageCategory category,OnRecyclerViewItemClickListener listener) {
         this.lists = lists;
         this.context = context;
+        this.category = category;
         this.listener = listener;
     }
 
@@ -35,10 +42,14 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.stove_item, parent, false);
+        //根据不同的页面加载不同的布局
+        if(category == PageCategory.SINGLE) {
+            view = layoutInflater.inflate(R.layout.stove_item_big, parent, false);
+        }
         ViewHolder holder = new ViewHolder(view);
-        view.setOnClickListener(v ->  {
-            listener.onItemClick(v,null);
-        });
+//        view.setOnClickListener(v ->  {
+//            listener.onItemClick(v,lists.get(holder.getAdapterPosition()).getAssetsCode());
+//        });
         return holder;
     }
 
@@ -46,7 +57,12 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, int position) {
         DeviceEntity stoveItem = lists.get(position);
         if(stoveItem != null) {
-
+            holder.stoveNum.setText(stoveItem.getAssetsCode());
+            holder.stoveRunStatus.setText(stoveItem.getStatus().name());
+            holder.stoveTempSetting.setText(stoveItem.getTemperature());
+            holder.stoveTempValue.setText(stoveItem.getTemperature1());
+            holder.stoveHumiSetting.setText(stoveItem.getHumidity());
+            holder.stoveHumiValue.setText(stoveItem.getHumidity1());
         }
     }
 

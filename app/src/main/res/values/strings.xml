@@ -9,5 +9,10 @@
     <string name="humidity">湿度 :&#160;</string>
     <string name="actual">实际 :&#160;</string>
 
-    <string name="BASE_URL"></string>
+    <!--TODO 添加BASE_URL-->
+    <string name="BASE_URL">http://192.168.0.9:8081/</string>
+    <string name="POSITION">position</string>
+    <string name="work_shop_code_positive">01</string>
+    <string name="work_shop_code_negative">02</string>
+
 </resources>

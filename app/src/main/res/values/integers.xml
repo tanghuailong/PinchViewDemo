@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--一些程序中用到的Integer类型的常量-->
+    <integer name="single_limit">15</integer>
+</resources>
