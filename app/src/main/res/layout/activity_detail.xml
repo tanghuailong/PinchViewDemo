@@ -15,14 +15,16 @@
             android:layout_height="wrap_content"
             android:textColor="@color/custom_txt_color"
             android:background="@drawable/border"
-            android:textSize="25sp"
+            android:textSize="20sp"
+            android:padding="4dp"
             tools:text="@string/negative_one"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9">
+        android:layout_weight="0.9"
+        android:layout_marginTop="4dp">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview"
             android:layout_width="match_parent"

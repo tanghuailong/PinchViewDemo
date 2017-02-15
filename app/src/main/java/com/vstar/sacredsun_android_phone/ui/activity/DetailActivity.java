@@ -66,6 +66,7 @@ public class DetailActivity extends AppCompatActivity {
             belongArea = bundle.getInt(areaPosition);
         }
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.getItemAnimator().setAddDuration(0);
         adapter = new StoveAdapter(list, this, PageCategory.SINGLE);
         recyclerView.setAdapter(adapter);
     }
@@ -116,7 +117,7 @@ public class DetailActivity extends AppCompatActivity {
                     Log.d(LOG_TAG, "onNext");
                     if (r.getItems().size() != 0) {
                         if (which == 1) {
-                            List<DeviceEntity> addToList = FunctionUtil.getHeaderList(r.getItems(), r.getItems().size());
+                            List<DeviceEntity> addToList = FunctionUtil.getHeaderList(r.getItems(),singleLimit);
                             updateRecyclerView(list,addToList, adapter);
                         } else if (which == 2) {
                             List<DeviceEntity> addToList = FunctionUtil.getFooterList(r.getItems(), singleLimit);

@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 
 public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
 
+    private static final String LOG_TAG = "StoveAdapter";
     private List<DeviceEntity> lists;
     private Context context;
     private PageCategory category;
@@ -55,11 +56,13 @@ public class StoveAdapter extends RecyclerView.Adapter<StoveAdapter.ViewHolder>{
         return holder;
     }
 
+
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         DeviceEntity stoveItem = lists.get(position);
         if(stoveItem != null) {
-            holder.container.setBackgroundColor(StatusMap.statusAndView.get(stoveItem.getStatus().name()));
+            holder.container.setBackgroundResource(StatusMap.statusAndView.get(stoveItem.getStatus().name()));
             holder.stoveNum.setText(stoveItem.getAssetsCode());
             holder.stoveRunStatus.setText(StatusMap.abbreAndDesc.get(stoveItem.getStatus().name()));
             holder.stoveTempSetting.setText(stoveItem.getTemperature());

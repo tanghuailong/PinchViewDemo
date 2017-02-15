@@ -2,28 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/stove_item_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="120dp"
+    android:layout_height="105dp"
     tools:background="@color/status_bar_dry"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/stove_num"
-            style="@style/custom_txt_big"
+            style="@style/detail_custom_txt_big"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="G101"
+            android:layout_marginLeft="6dp"
             ></TextView>
         <TextView
             android:id="@+id/stove_run_status"
-            style="@style/custom_txt_middle"
+            style="@style/detail_custom_txt_middle"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="6dp"
             tools:text="干燥"
             ></TextView>
     </RelativeLayout>
@@ -33,15 +37,16 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/temperature_title"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/temperature"
+            android:layout_marginLeft="6dp"
             ></TextView>
         <TextView
             android:id="@+id/stove_temp_setting"
             android:layout_toRightOf="@id/temperature_title"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="60"
@@ -49,14 +54,15 @@
         <TextView
             android:id="@+id/stove_temp_value"
             android:layout_alignParentRight="true"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="60"
+            android:layout_marginRight="6dp"
             ></TextView>
         <TextView
             android:layout_toLeftOf="@id/stove_temp_value"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/actual"
@@ -69,15 +75,16 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/humidity_title"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/humidity"
+            android:layout_marginLeft="6dp"
             ></TextView>
         <TextView
             android:id="@+id/stove_humi_setting"
             android:layout_toRightOf="@id/humidity_title"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="60"
@@ -85,14 +92,15 @@
         <TextView
             android:id="@+id/stove_humi_value"
             android:layout_alignParentRight="true"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="60"
+            android:layout_marginRight="6dp"
             ></TextView>
         <TextView
             android:layout_toLeftOf="@id/stove_humi_value"
-            style="@style/custom_txt_small"
+            style="@style/detail_custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/actual"

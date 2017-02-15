@@ -1,12 +1,16 @@
 package com.vstar.sacredsun_android_phone.ui.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.vstar.sacredsun_android_phone.R;
+import com.vstar.sacredsun_android_phone.service.HintService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +24,8 @@ public class TestActivity extends AppCompatActivity{
 
     @BindView(R.id.layout1)
     RelativeLayout layout;
+    @BindView(R.id.start_service)
+    Button startService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,23 +35,28 @@ public class TestActivity extends AppCompatActivity{
 
     }
 
-    @OnClick(R.id.layout1)
+    @OnClick(R.id.start_service)
     public void clickLayout() {
-
-        float percent = (layout.getWidth())/(layout.getHeight());
-
-        layout.animate().scaleX(2*percent).scaleY(2f)
-                .translationX(0.5f)
-                .translationY(0.5f)
-                .setInterpolator(new AccelerateDecelerateInterpolator())
-                .setDuration(1000)
-                .start();
-
-//        Intent intent = new Intent(TestActivity.this,JumpActivity.class);
-//        startActivity(intent);
-//        overridePendingTransition(0,0);
-
+        Intent intent = new Intent(this, HintService.class);
+        startService(intent);
     }
+
+    @OnClick(R.id.stop_service)
+    public void test() {
+        Intent intent = new Intent(this, HintService.class);
+        stopService(intent);
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 }

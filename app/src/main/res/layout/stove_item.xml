@@ -19,6 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
             tools:text="G101"
             ></TextView>
         <TextView
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="干燥"
+            android:layout_marginRight="1dp"
             ></TextView>
     </RelativeLayout>
 
@@ -40,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/temperature"
+            android:layout_marginLeft="1dp"
             ></TextView>
         <TextView
             android:id="@+id/stove_temp_setting"
@@ -55,8 +58,8 @@
             style="@style/custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="60"
-            ></TextView>
+            android:layout_marginRight="1dp"
+            tools:text="60"/>
         <TextView
             android:layout_toLeftOf="@id/stove_temp_value"
             style="@style/custom_txt_small"
@@ -76,23 +79,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/humidity"
-            ></TextView>
+            android:layout_marginLeft="1dp"/>
         <TextView
             android:id="@+id/stove_humi_setting"
             android:layout_toRightOf="@id/humidity_title"
             style="@style/custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="60"
-            ></TextView>
+            tools:text="60"/>
         <TextView
             android:id="@+id/stove_humi_value"
             android:layout_alignParentRight="true"
             style="@style/custom_txt_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="60"
-            ></TextView>
+            android:layout_marginRight="1dp"
+            tools:text="60"/>
         <TextView
             android:layout_toLeftOf="@id/stove_humi_value"
             style="@style/custom_txt_small"

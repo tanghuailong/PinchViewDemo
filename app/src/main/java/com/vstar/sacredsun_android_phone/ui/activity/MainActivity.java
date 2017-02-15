@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         settingRecyclerView(recyclerViewPT, AppConstant.POSITIVE_TWO);
         settingRecyclerView(recyclerViewNO, AppConstant.NEGATIVE_ONE);
         settingRecyclerView(recyclerViewNT, AppConstant.NEGATIVE_TWO);
-
         initData();
     }
 
@@ -100,22 +99,31 @@ public class MainActivity extends AppCompatActivity {
             case AppConstant.POSITIVE_ONE:
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 positive_adapter_1 = new StoveAdapter(list_positive_1, this, PageCategory.ALL);
+//                positive_adapter_1.setHasStableIds(true);
                 recyclerView.setAdapter(positive_adapter_1);
+                recyclerView.getItemAnimator().setChangeDuration(0);
                 break;
             case AppConstant.POSITIVE_TWO:
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 positive_adapter_2 = new StoveAdapter(list_positive_2, this,PageCategory.ALL);
+//                positive_adapter_2.setHasStableIds(true);
                 recyclerView.setAdapter(positive_adapter_2);
+                recyclerView.getItemAnimator().setChangeDuration(0);
                 break;
             case AppConstant.NEGATIVE_ONE:
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 negative_adapter_1 = new StoveAdapter(list_negative_1, this,PageCategory.ALL);
+//                negative_adapter_1.setHasStableIds(true);
                 recyclerView.setAdapter(negative_adapter_1);
+                recyclerView.getItemAnimator().setChangeDuration(0);
+
                 break;
             case AppConstant.NEGATIVE_TWO:
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 negative_adapter_2 = new StoveAdapter(list_negative_2, this,PageCategory.ALL);
+//                negative_adapter_2.setHasStableIds(true);
                 recyclerView.setAdapter(negative_adapter_2);
+                recyclerView.getItemAnimator().setChangeDuration(0);
                 break;
             default:
                 break;
@@ -143,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
         subscription2 = HttpMethods.getInstane().getService(MobileApi.class)
                 .getDeviceBasicData(negative)
                 .compose(RxHelper.io_main())
-                .retryWhen(errors -> errors.flatMap(error -> Observable.timer(10, TimeUnit.SECONDS)))
-                .repeatWhen(completed -> completed.delay(10, TimeUnit.SECONDS))
+                .retryWhen(errors -> errors.flatMap(error -> Observable.timer(5, TimeUnit.SECONDS)))
+                .repeatWhen(completed -> completed.delay(5, TimeUnit.SECONDS))
                 .subscribe((r) -> {
                     if (r.getItems().size() <= singleLimit) {
                         updateRecyclerView(list_negative_1, r.getItems(), negative_adapter_1);
