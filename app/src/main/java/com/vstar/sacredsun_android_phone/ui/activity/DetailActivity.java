@@ -66,7 +66,7 @@ public class DetailActivity extends AppCompatActivity {
             belongArea = bundle.getInt(areaPosition);
         }
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.getItemAnimator().setAddDuration(0);
+        recyclerView.getItemAnimator().setChangeDuration(0);
         adapter = new StoveAdapter(list, this, PageCategory.SINGLE);
         recyclerView.setAdapter(adapter);
     }
@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (subscription != null && subscription.isUnsubscribed()) {
+        if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
     }
