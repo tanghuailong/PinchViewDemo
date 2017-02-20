@@ -2,12 +2,15 @@ package com.vstar.sacredsun_android_phone.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.vstar.sacredsun_android_phone.R;
 import com.vstar.sacredsun_android_phone.adapter.StoveAdapter;
@@ -18,6 +21,7 @@ import com.vstar.sacredsun_android_phone.util.FunctionUtil;
 import com.vstar.sacredsun_android_phone.util.HttpMethods;
 import com.vstar.sacredsun_android_phone.util.PageCategory;
 import com.vstar.sacredsun_android_phone.util.RxHelper;
+import com.vstar.sacredsun_android_phone.util.SPHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Subscription subscription1 = null;
     private Subscription subscription2 = null;
-
+    private long lastPressTime;
+    private static final long TIME_INTERVAL = 2000;
     private static final String LOG_TAG = "MainActivity";
 
     @Override
@@ -212,6 +217,50 @@ public class MainActivity extends AppCompatActivity {
         }
         if(subscription2!=null && !subscription2.isUnsubscribed()){
             subscription2.unsubscribe();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(lastPressTime + TIME_INTERVAL > System.currentTimeMillis()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("退出")
+                    .setIcon(R.drawable.error)
+                    .setMessage("你确认要退出么?")
+                    .setPositiveButton("退出",((dialog, which) -> {
+                        super.onBackPressed();
+                        return;
+                    }))
+                    .setNegativeButton("取消",null)
+                    .setNeutralButton("登出",(((dialog, which) -> {
+                        userLoginOut();
+                    })))
+                    .show();
+        }else {
+            Toast.makeText(this,"请再按一次后退键",Toast.LENGTH_SHORT).show();
+        }
+        lastPressTime = System.currentTimeMillis();
+    }
+
+    private void userLoginOut() {
+        String session = (String) SPHelper.get(MainActivity.this,getString(R.string.USER_SESSION),"");
+
+        if(!TextUtils.isEmpty(session)) {
+            HttpMethods.getInstane().getService(MobileApi.class)
+                    .userLoginout(session)
+                    .compose(RxHelper.io_main())
+                    .subscribe((r) -> {
+                        Log.d(LOG_TAG,"login out onnext");
+                    },(e) -> {
+                        Log.d(LOG_TAG,"some error happen in login out",e);
+                        Toast.makeText(MainActivity.this,"登出遇到某些问题",Toast.LENGTH_SHORT).show();
+                    });
+            SPHelper.remove(MainActivity.this, getString(R.string.IS_LOGIN));
+            SPHelper.remove(MainActivity.this, getString(R.string.USER_SESSION));
+            //跳回到登陆页面
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
