@@ -251,16 +251,25 @@ public class MainActivity extends AppCompatActivity {
                     .compose(RxHelper.io_main())
                     .subscribe((r) -> {
                         Log.d(LOG_TAG,"login out onnext");
+                        SPHelper.remove(MainActivity.this, getString(R.string.IS_LOGIN));
+                        SPHelper.remove(MainActivity.this, getString(R.string.USER_SESSION));
+                        jumpToLoginPage();
                     },(e) -> {
                         Log.d(LOG_TAG,"some error happen in login out",e);
                         Toast.makeText(MainActivity.this,"登出遇到某些问题",Toast.LENGTH_SHORT).show();
                     });
+        }else {
+            SPHelper.remove(MainActivity.this,getString(R.string.USER_SESSION));
             SPHelper.remove(MainActivity.this, getString(R.string.IS_LOGIN));
-            SPHelper.remove(MainActivity.this, getString(R.string.USER_SESSION));
-            //跳回到登陆页面
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            jumpToLoginPage();
         }
+    }
+
+    private void jumpToLoginPage() {
+
+        //跳回到登陆页面
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

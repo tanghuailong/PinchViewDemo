@@ -3,6 +3,7 @@ package com.vstar.sacredsun_android_phone.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password_layout)
     TextInputLayout passwordLayout;
     @BindView(R.id.password)
-    EditText password;
+    TextInputEditText password;
     @BindView(R.id.btn_login)
     Button btn_login;
 
