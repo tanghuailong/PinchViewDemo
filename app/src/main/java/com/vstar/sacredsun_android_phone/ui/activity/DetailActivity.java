@@ -74,15 +74,23 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(LOG_TAG,"onStart");
         initData(belongArea);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(LOG_TAG,"onStop");
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG,"onDestory");
     }
 
     private void initData(int postion) {
